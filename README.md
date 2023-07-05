@@ -1,1 +1,1 @@
-Exercícios e anotações do livro C Programming: A Modern Approach
+Exercises and notes from my reading of the book C Programming: A Modern Approach

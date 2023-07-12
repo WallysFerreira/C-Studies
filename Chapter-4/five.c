@@ -4,7 +4,7 @@ int main(void) {
 	int a1, b1, b2, b3, b4, b5, c1, c2, c3, c4, c5;
 	int first_sum, second_sum, remainder;
 
-	printf("Enter first barcode: ");
+	printf("Enter barcode: ");
 	scanf("%1d %1d%1d%1d%1d%1d %1d%1d%1d%1d%1d", &a1, &b1, &b2, &b3, &b4, &b5, &c1, &c2, &c3, &c4, &c5);
 
 	first_sum = a1 + b2 + b4 + c1 + c3 + c5;

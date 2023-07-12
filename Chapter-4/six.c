@@ -16,7 +16,7 @@ int main(void) {
 	digit = first_sum % 10;
 	digit = 9 - digit;
 
-	printf("%d\n", digit);
+	printf("Digit: %d\n", digit);
 	
 	return 0;
 }

@@ -41,8 +41,12 @@ int main(void) {
 			result_num = (lcm / denom1) * num1 - (lcm / denom2) * num2; 
 			break;
 		case '*':
+			result_num = num1 * num2;
+			result_denom = denom1 * denom2;
 			break;
 		case '/':
+			result_num = num1 * denom2;
+			result_denom = denom1 * num2;
 			break;
 	}
 

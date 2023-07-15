@@ -23,6 +23,8 @@ int find_lcm(int den1, int den2) {
 	return (den1 * den2) / gcd;
 }
 
+// Simplify fraction in '-'
+// Get result in '/'
 int main(void) {
 	int num1, denom1, num2, denom2, result_num, result_denom, lcm;
 	char op;

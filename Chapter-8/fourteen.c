@@ -37,7 +37,6 @@ int main(void) {
 				sentence[i][j] = final;
 			}
 
-
 			if (sentence[i][j] != '\n') {
 				printf("%c", sentence[i][j]);
 			}

@@ -37,7 +37,6 @@ int main(void) {
 			letters_used[index]++;
 		}
 	}
-
 	for (int i = 0; i < 15; i++) {
 		int index = word2[i] - 65;
 
@@ -45,7 +44,6 @@ int main(void) {
 			letters_used[index]--;
 		}
 	}
-
 	for (int i = 0; i < 26; i++) {
 		if (letters_used[i] != 0) {
 			different = 1;

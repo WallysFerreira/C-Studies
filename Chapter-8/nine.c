@@ -10,7 +10,7 @@
 int main(void) {
 	char table[10][10], letters[26], current_x = 0, current_y = 0;
 	srand(time(0));
-	int next_move = rand() % 4, tries;
+	int next_move = rand() % 4;
 
 	// Populate letters array
 	for (int i = 0; i < 26; i++) {

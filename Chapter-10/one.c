@@ -45,6 +45,27 @@ char pop(void) {
 }
 
 int main(void) {
+	printf("Enter parentheses and/or braces: ");
+	for (int i = 0; i < STACK_SIZE; i++) {
+		char c;
+		scanf("%c", &c);
+
+		if (c == '(' || c == '{') {
+			push(c);
+		}
+
+		if ((c == ')' && pop() != '(') || (c == '}' && pop() != '{')) {
+			printf("Parentheses/braces are not matched properly\n");
+			break;
+		}
+
+		if (c == '\n') {
+			printf("%s\n", is_empty() ? "Parentheses/braces are matched properly" : "Parentheses/braces are not matched properly");
+			break;
+		}
+			
+		printf("\nDEBUG %d\n\n", top);
+	}
 
 	return 0;
 }

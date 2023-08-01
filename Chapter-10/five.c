@@ -9,7 +9,7 @@
 // External variables
 int num_in_rank[NUM_RANKS];
 int num_in_suit[NUM_SUITS];
-bool straight, flush, four, three;
+bool straight, flush, four, three, ace_low;
 int pairs; // Can be 0, 1 or 2
 
 // Prototypes
@@ -100,11 +100,17 @@ void analyze_hand(void) {
 	flush = false;
 	four = false;
 	three = false;
+	ace_low = true;
 	pairs = 0;
 
 	// Check for flush
 	for (suit = 0; suit < NUM_SUITS; suit++) {
 		if (num_in_suit[suit] == NUM_CARDS) flush = true;
+	}
+
+	// Check for ace-low
+	for (rank = 0; rank < 4; rank++) {
+		if (num_in_rank[rank] != 1 || num_in_rank[12] != 1) ace_low = false;
 	}
 
 	// Check for straight
@@ -130,6 +136,7 @@ void print_result(void) {
 	else if (four)								printf("Four of a kind");
 	else if (three && pairs == 1)	printf("Full house");
 	else if (flush)								printf("Flush");
+	else if (ace_low)							printf("Ace-low");
 	else if (straight)						printf("Straight");
 	else if (three)								printf("Three of a kind");
 	else if (pairs == 2)					printf("Two pairs");

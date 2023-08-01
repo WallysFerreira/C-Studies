@@ -32,9 +32,7 @@ void read_cards(void) {
 	bool bad_card;
 	int cards_read = 0;
 
-	for (int i = 0; i < NUM_CARDS; i++) {
-		cards[i][0] = 0;
-	}
+	for (int i = 0; i < NUM_CARDS; i++)	cards[i][0] = 0;
 
 	for (int i = 0; i < NUM_CARDS; i++) cards[i][1] = 0;
 
@@ -94,7 +92,7 @@ void read_cards(void) {
 
 // analyze_hand: Determines whether the hand contains a straight, a flush, four-of-a-kind, and/or three-of-a-kind; determines the number of paris; stores the results into the external variables straight, flush, four, three, and pairs.
 void analyze_hand(void) {
-	int num_consec = 0;
+	int num_consec = 1;
 	int rank, suit;
 
 	straight = false;
@@ -124,7 +122,7 @@ void analyze_hand(void) {
 	} */
 
 	// Check for straight
-	for (int i = 0; i < NUM_CARDS; i += 2) {
+	for (int i = 0; i < NUM_CARDS; i++) {
 		if (abs(cards[i][0] - cards[i + 1][0]) == 1) {
 			num_consec++;
 		}
@@ -144,9 +142,14 @@ void analyze_hand(void) {
 	} */
 
 	// Check for a 4-of-a-kind, 3-of-a-kind, and pairs
-	int count = 0;
-	for (int i = 0; i < NUM_CARDS; i += 2) {
-		if (cards[i][0] == cards[i + 1][0]) count++;
+	int count = 1;
+	for (int i = 0; i < NUM_CARDS - 1; i++) {
+		for (int j = i + 1; j < NUM_CARDS; j++) {
+			if (cards[i][1] == cards[j][1]) {
+				count++;
+				break;
+			}
+		}
 	}
 	if (count == 4) four = true;
 	if (count == 3) three = true;

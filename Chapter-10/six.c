@@ -13,6 +13,8 @@ bool is_empty(void);
 bool is_full(void);
 void push(char c);
 char pop(void);
+char int_to_char(int i);
+int char_to_int(char c);
 
 int main(void) {
 	char c;
@@ -27,25 +29,25 @@ int main(void) {
 			case '+':
 				n1 = pop() - '0';
 				n2 = pop() - '0';
-				push((n1 + n2) + '0');
+				push(int_to_char(n1 + n2));
 				break;
 			case '-':
 				n1 = pop() - '0';
 				n2 = pop() - '0';
-				push((n1 - n2) + '0');
+				push(int_to_char(n1 - n2));
 				break;
 			case '/':
 				n1 = pop() - '0';
 				n2 = pop() - '0';
-				push((n1 / n2) + '0');
+				push(int_to_char(n1 / n2));
 				break;
 			case '*':
 				n1 = pop() - '0';
 				n2 = pop() - '0';
-				push((n1 * n2) + '0');
+				push(int_to_char(n1 * n2));
 				break;
 			case '=':
-				printf("Value of expression: %d\n", pop() - '0');
+				printf("Value of expression: %d\n", char_to_int(pop()));
 				break;
 			case ' ':
 				break;
@@ -81,3 +83,7 @@ char pop(void) {
 		return contents[--top];
 	}
 }
+
+char int_to_char(int i) {	return i + '0'; }
+
+int char_to_int(char c) { return c - '0'; }

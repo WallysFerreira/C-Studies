@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -13,8 +14,6 @@ bool is_empty(void);
 bool is_full(void);
 void push(char c);
 char pop(void);
-char int_to_char(int i);
-int char_to_int(char c);
 
 int main(void) {
 	char c;
@@ -22,37 +21,43 @@ int main(void) {
 
 	printf("Enter an RPN expression: ");
 	
-	for (int i = 0; i < SIZE; i++) {
-		scanf("%c", &c);
-		
+	for (;;) {
+		scanf(" %c", &c);
+
 		switch (c) {
 			case '+':
-				n1 = pop() - '0';
-				n2 = pop() - '0';
-				push(int_to_char(n1 + n2));
+				n2 = pop();
+				n1 = pop();
+				push(n1 + n2);
 				break;
 			case '-':
-				n1 = pop() - '0';
-				n2 = pop() - '0';
-				push(int_to_char(n1 - n2));
+				n2 = pop();
+				n1 = pop();
+				push(n1 - n2);
 				break;
 			case '/':
-				n1 = pop() - '0';
-				n2 = pop() - '0';
-				push(int_to_char(n1 / n2));
+				n2 = pop();
+				n1 = pop();
+				push(n1 / n2);
 				break;
 			case '*':
-				n1 = pop() - '0';
-				n2 = pop() - '0';
-				push(int_to_char(n1 * n2));
+				n2 = pop();
+				n1 = pop();
+				push(n1 * n2);
 				break;
 			case '=':
-				printf("Value of expression: %d\n", char_to_int(pop()));
+				printf("Value of expression: %d\n", pop());
+				top = 0;
+				printf("Enter an RPN expression: ");
 				break;
-			case ' ':
+			case ' ': case '\n':
 				break;
 			default:
-				push(c);
+				if (isdigit(c)) {
+					push(c - '0');
+				} else {
+					exit(EXIT_SUCCESS);
+				}
 		}
 	}
 
@@ -78,12 +83,9 @@ void push(char c) {
 char pop(void) {
 	if (is_empty()) {
 		stack_underflow();
-		return '\0';
+		return 0;
 	} else {
 		return contents[--top];
 	}
 }
 
-char int_to_char(int i) {	return i + '0'; }
-
-int char_to_int(char c) { return c - '0'; }

@@ -21,14 +21,15 @@ void process_digit(int digit, int position);
 void print_digits_array(void);
 
 int main(void) {
-	int n1 = 8;
+	int n1 = 2;
 	int k = 0;
 
 	clear_digits_array();
 
-	int col = 0, row = 0;
+	int row;
 	for (int i = 0; i < 7; i++) {
 		if (segments[n1][i]) {
+			/* HARD CODED
 			switch (i) {
 				case 0:
 					digits[0][1] = '_';
@@ -50,6 +51,22 @@ int main(void) {
 					break;
 				case 6:
 					digits[1][1] = '_';
+					break;
+			}
+			*/
+
+			switch (i) {
+				case 0:
+					digits[0][1] = '_';
+					break;
+				case 1: case 2:
+					digits[i][2] = '|';
+					break;
+				case 3: case 6:
+					digits[6 / i][1] = '_';
+					break;
+				case 4: case 5:
+					digits[6 - i][0] = '|';
 					break;
 			}
 		}

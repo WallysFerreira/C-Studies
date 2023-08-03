@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+#define MAX_DIGITS 1
+
+int segments[10][7] = {
+	{1, 1, 1, 1, 1, 1, 0},
+	{0, 1, 1, 0, 0, 0, 0},
+	{1, 1, 0, 1, 1, 0, 1},
+	{1, 1, 1, 1, 0, 0, 1},
+	{0, 1, 1, 0, 0, 1, 1},
+	{1, 0, 1, 1, 0, 1, 1},
+	{1, 0, 1, 1, 1, 1, 1},
+	{1, 1, 1, 0, 0, 0, 0},
+	{1, 1, 1, 1, 1, 1, 1},
+	{1, 1, 1, 1, 0, 1, 1}
+};
+char digits[4][MAX_DIGITS * 4];
+
+void clear_digits_array(void);
+void process_digit(int digit, int position);
+void print_digits_array(void);
+
+int main(void) {
+	int n1 = 8;
+	int k = 0;
+
+	clear_digits_array();
+
+	int col = 0, row = 0;
+	for (int i = 0; i < 7; i++) {
+		if (segments[n1][i]) {
+			switch (i) {
+				case 0:
+					digits[0][1] = '_';
+					break;
+				case 1:
+					digits[1][2] = '|';
+					break;
+				case 2:
+					digits[2][2] = '|';
+					break;
+				case 3:
+					digits[2][1] = '_';
+					break;
+				case 4:
+					digits[2][0] = '|';
+					break;
+				case 5:
+					digits[1][0] = '|';
+					break;
+				case 6:
+					digits[1][1] = '_';
+					break;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < MAX_DIGITS * 4; j++) {
+			printf("%c", digits[i][j]);
+		}
+
+		printf("\n");
+	}
+
+	return 0;
+}
+
+void clear_digits_array(void) {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < MAX_DIGITS * 4; j++) {
+			digits[i][j] = ' ';
+		}
+	}
+}

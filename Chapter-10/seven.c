@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAX_DIGITS 10
 
@@ -23,14 +24,27 @@ void print_digits_array(void);
 int main(void) {
 	int n;
 
-	printf("Enter a number: ");
-	scanf("%d", &n);
-
 	clear_digits_array();
-	
+
+	printf("Enter a number: ");
+
 	for (int i = 0; i < MAX_DIGITS * 4; i += 4) {
-		process_digit(n % 10, i);
-		n /= 10;
+		char c;
+		int got = 0;
+
+		while (!got) {
+			c = getchar();
+
+			if (c >= 48 && c <= 57) {
+				got = 1;
+				n = c - '0';
+			} else if (c == '\n') {
+				print_digits_array();
+				exit(EXIT_SUCCESS);
+			}
+		}
+
+		process_digit(n, i);
 	}
 
 	print_digits_array();

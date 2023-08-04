@@ -40,7 +40,7 @@ int main(void) {
 				n = c - '0';
 			} else if (c == '\n') {
 				print_digits_array();
-				exit(EXIT_SUCCESS);
+				return 0;
 			}
 		}
 

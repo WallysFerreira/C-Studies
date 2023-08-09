@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#define N 10
+#define N 20
 
 int main(void) {
-	char ch, string[N];
-	char *p;
+	char ch, string[N], reverse[N];
+	char *p, *p2;
 
 	printf("Enter a message: ");
 
@@ -16,10 +16,15 @@ int main(void) {
 		*p = ch;
 	}
 
-	for (int i = 0; i < N; i++) {
-		printf("%c", string[i]);
+	p2 = &reverse[0];
+	for (p = &string[N]; p >= &string[0]; p--) {
+		if (*p == '\0') continue;
+
+		*p2 = *p;
+		p2++;
 	}
-	printf("\n");
+	
+	printf("Reversal is: %s\n", reverse);
 
 	return 0;
 }

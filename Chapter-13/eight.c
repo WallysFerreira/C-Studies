@@ -1,14 +1,27 @@
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
 
+int compute_scrabble_value(const char *word);
+
 int main(void) {
-	char c;
-	int sum = 0;
+	char *input;
 
 	printf("Enter a word: ");
 
-	while ((c = getchar()) != '\n') {
-		c = toupper(c);
+	scanf("%s", input); 
+
+	printf("Scrabble value: %d\n", compute_scrabble_value(input));
+
+	return 0;
+}
+
+int compute_scrabble_value(const char *word) {
+	char c;
+	int sum = 0;
+
+	for (int i = 0; i < strlen(word); i++) {
+		c = toupper(word[i]);
 
 		switch (c) {
 			case 'A': case 'E': case 'I': case 'L': case 'N': case 'O': case 'R': case 'S': case 'T': case 'U':
@@ -35,7 +48,5 @@ int main(void) {
 		}
 	}
 
-	printf("Scrabble value: %d\n", sum);
-
-	return 0;
+	return sum;
 }

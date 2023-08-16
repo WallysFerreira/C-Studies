@@ -1,21 +1,32 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+double compute_average_word_length(const char *sentence);
 
 int main(void) {
-	int word_count = 1, char_count = 0;
 	float avg;
-	char c;
+	char *input;
 
-	while ((c = getchar()) != '\n') {
-		if (c != ' ') {
-			char_count++;
-		} else {
-			word_count++;
+	fgets(input, 30, stdin);
+
+	avg = compute_average_word_length(input);
+
+	printf("Average word length: %.1f\n", avg);
+
+	return 0;
+}
+
+double compute_average_word_length(const char *sentence) {
+	float count = 1, sum = 0;
+
+	for (int i = 0; i < strlen(sentence); i++) {
+		if (sentence[i] == ' ') {
+			count++;
+		} else if (isalpha(sentence[i])) {
+			sum++;
 		}
 	}
 
-	avg = (float) char_count / word_count;
-
-	printf("Sentence length: %d\nWords in sentence: %d\nAverage word length: %.1f\n", char_count, word_count, avg);
-
-	return 0;
+	return sum / count;
 }

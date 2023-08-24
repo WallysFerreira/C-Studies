@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define SIZE 100
 
@@ -17,70 +18,17 @@ char pop(void);
 int evaluate_RPN_expression(const char *expression);
 
 int main(void) {
-	char c;
-	int n1, n2;
+	char *string;
 
 	printf("Enter an RPN expression: ");
 
 	for (;;) {
-		scanf(" %c", &c);
-
-		if (c == '=') {
-			evaluate_RPN_expression(contents);
-			top = 0;
-			printf("Enter an RPN expression: ");
-		}
-
-		if (isalpha(c)) {
-			exit(EXIT_SUCCESS);
-		}
-
-		if (isdigit(c)) {
-			push(c - '0');
-		} else {
-			push(c);
-		}
-	}
+		fgets(string, SIZE, stdin);
 	
-	/*for (;;) {
-		scanf(" %c", &c);
-
-		switch (c) {
-			case '+':
-				n2 = pop();
-				n1 = pop();
-				push(n1 + n2);
-				break;
-			case '-':
-				n2 = pop();
-				n1 = pop();
-				push(n1 - n2);
-				break;
-			case '/':
-				n2 = pop();
-				n1 = pop();
-				push(n1 / n2);
-				break;
-			case '*':
-				n2 = pop();
-				n1 = pop();
-				push(n1 * n2);
-				break;
-			case '=':
-				printf("Value of expression: %d\n", pop());
-				top = 0;
-				printf("Enter an RPN expression: ");
-				break;
-			case ' ': case '\n':
-				break;
-			default:
-				if (isdigit(c)) {
-					push(c - '0');
-				} else {
-					exit(EXIT_SUCCESS);
-				}
-		}
-	}*/
+		printf("Result: %d\n", evaluate_RPN_expression(string));
+		top = 0;
+		printf("Enter an RPN expression: ");
+	}
 
 	return 0;
 }
@@ -111,9 +59,45 @@ char pop(void) {
 }
 
 int evaluate_RPN_expression(const char *expression) {
-	for (int i = 0; i < top; i++) {
-	}
+	int n1, n2;
 
-	return 0;
+	for (int i = 0; i < strlen(expression); i++) {
+		char c = expression[i];
+
+		switch (c) {
+			case '+':
+				n2 = pop();
+				n1 = pop();
+				push(n1 + n2);
+				break;
+			case '-':
+				n2 = pop();
+				n1 = pop();
+				push(n1 - n2);
+				break;
+			case '/':
+				n2 = pop();
+				n1 = pop();
+				push(n1 / n2);
+				break;
+			case '*':
+				n2 = pop();
+				n1 = pop();
+				push(n1 * n2);
+				break;
+			case '=':
+				return pop();
+				break;
+			case ' ': case '\n':
+				break;
+			default:
+				if (isdigit(c)) {
+					push(c - '0');
+				} else {
+					exit(EXIT_SUCCESS);
+				}
+				break;
+		}
+	}
 }
 

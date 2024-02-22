@@ -20,6 +20,11 @@ There are simple and parameterized macros.
 Simple macros have an identifier and a repĺacement list, that may include identifiers, keywords, numeric constants, character constants, string literals, operators, and punctuation.
 Parameterized macros can receive parameters besides an identifier and a replacement list. They often serve as simple functions.
 
+```C
+#define THIS 10         // Simple macro
+#define DOUBLE(n) ((n)*2)   // Parameterized macro
+```
+
 Using a parameterized macro instead of an actual function has some advantages:
 
 - It can be slightly faster.
@@ -54,6 +59,16 @@ C has some predefined macros that represents either an integer constant or a str
 These directives instruct the preprocessor to include or exclude lines from the program depending on some condition.
 
 One of the conditions that the preprocessor can test is the definition of certain macros, using the _defined_ operator or the #ifdef and #ifndef directives.
+
+```c
+#define CONDITION 1
+
+#if CONDITION
+  // Do something
+#else
+  // Do something else
+#endif
+```
 
 Conditional compilation is often applied to:
 - Writing programs that are portable to multiple machines or operating systems
